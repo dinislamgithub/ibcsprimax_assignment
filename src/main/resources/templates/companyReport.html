@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>     
+     <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+     <link th:rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>  
+     
+</head>
+<body>
+      <div class="container"> 
+		      <h1>IBCS-PRIMAX EMPLOYEE SALARY PAYMENT SYSTEM</h1> 
+		    <hr>
+      		<div class="clearfix text-center">			     
+			    <a href="/registerEmpoyeeAccount" type="button" class="btn btn-primary" id="employeeBtn">Employee Account</a>
+			    <a href="/createCompanyAccount" type="button" class="btn btn-primary" id="companyBtn">Company Account</a>
+			    <a href="/empSalaryTransaction" type="button" class="btn btn-primary" id="salaryTransactionBtn">Salary Transaction</a>
+			    <a href="/employeeReport" type="button" class="btn btn-primary" id="employeeSalaryReportBtn">Employee Salary Report</a>
+			    <a href="/companyReport" type="button" class="btn btn-primary" id="companySalaryReportBtn">Company Salary Report</a> 
+	   		</div>
+      </div>
+      
+      
+
+<!-- Report Section  for Company salary-->  
+
+<div class="container" id="companySalaryReportDiv"> 
+	  <form th:action="@{/companyReport}" th:object="${bankAccountDto}" method="post"> 
+	    <h1>Company Salary Report Details</h1>
+	    <hr>  
+	    	 <label for="accountNumber">Account Number</label>		
+	    	 <div class="form-group input-group mb-9">
+	    		 <input type="text" th:field="*{accountNumber}" id="accountNumber" placeholder="Account Number" class="form-control" required="required">
+	    		 
+			   	  <div class="input-group-append"> 
+				   	<button  class="btn btn-primary" value="Submit" id="compReportBtn">Show Report</button>  
+				  </div> 
+			</div>
+			
+	    </form>
+	    
+	    
+	    
+	     <div id="empAcMsgId2" class="container alert alert-success" th:if ="${dupCompMainAccMsg}" style="width :fit-content; margin-top:10px">  
+     		<h5 th:text="${dupCompMainAccMsg}" class="text-center"></h5>  
+  		 </div>
+   
+	    <div id="compReportResultDiv" th:if ="${msg}">
+	  <form>
+	  <fieldset>
+  			<legend>Company Personal Bank Account Details</legend>
+		  <div class="form-group">
+		    <label>Account Number : <span th:text="${bankAccountDto.accountNumber}"></span></label>
+		   </div><br>
+		   <div class="form-group">
+		    <label>Total Paid Balance : <span th:text="${bankAccountDto.totalBalance}"></span></label> 
+		   </div><br>
+		   <div class="form-group">
+		    <label>Total Remaining Balance : <span th:text="${bankAccountDto.remainingBalance}"></span></label> 
+		   </div>
+		   </fieldset>
+	    </form>
+	    </div>
+	   
+	    
+ </div>   
+    
+  
+
+     
+     
+      
+      
+     
+      
+      
+      
+      
+      
+
+	<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+	<script src="/webjars/popper.js/1.14.3/popper.min.js"></script>
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+			 /*  $("#employeeDiv").hide();
+			 $("#companyDiv").hide();
+			 $("#salaryTransactionDiv").hide(); 
+			 $("#employeeSalaryReportDiv").hide();
+			 $("#companySalaryReportDiv").show();
+			 $("#increaseCompanyAccountDiv").hide(); //test   */
+			  
+			});
+	</script>
+</body>
+</html>

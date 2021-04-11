@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>     
+     <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+     <link th:rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>  
+     
+</head>
+<body>
+      <div class="container"> 
+		      <h1>IBCS-PRIMAX EMPLOYEE SALARY PAYMENT SYSTEM</h1> 
+		    <hr>
+      		<div class="clearfix text-center">			     
+			    <a href="/registerEmpoyeeAccount" type="button" class="btn btn-primary" id="employeeBtn">Employee Account</a>
+			    <a href="/createCompanyAccount" type="button" class="btn btn-primary" id="companyBtn">Company Account</a>
+			    <a href="/empSalaryTransaction" type="button" class="btn btn-primary" id="salaryTransactionBtn">Salary Transaction</a>
+			    <a href="/employeeReport" type="button" class="btn btn-primary" id="employeeSalaryReportBtn">Employee Salary Report</a>
+			    <a href="/companyReport" type="button" class="btn btn-primary" id="companySalaryReportBtn">Company Salary Report</a> 
+	   		</div>
+      </div>
+      
+      
+
+<!-- Report Section  for employee salary-->   
+<div class="container" id="employeeSalaryReportDiv"> 
+	  <form th:action="@{/employeeReport}" th:object="${employeeDto}" method="post"> 
+	    <h1>Employee Salary Report Details</h1>
+	    <hr>  
+	    		
+	    	 <label for="employeeID">Employee ID</label>		
+	    	 <div class="form-group input-group mb-9">
+	    		 <input type="text" th:field="*{employeeID}" id="employeeID" placeholder="Employee Id" class="form-control" required="required">
+	    		 
+			   	  <div class="input-group-append"> 
+				   	<button  class="btn btn-primary" value="Submit" id="empReportBtn">Show Report</button>  				   	
+				  </div> 
+			</div>
+	    </form>
+	    
+	
+	  
+	  <div id="empReportResultDiv" th:if ="${msg}">
+	  <form>
+	  <fieldset>
+  <legend>Employee Personal Bank Account Details</legend>
+		  <div class="form-group">
+		    <label>Employee ID : <span th:text="${employeeDto.employeeID}"></span></label>
+		   </div><br>
+		   <div class="form-group">
+		    <label>Employee Name : <span th:text="${employeeDto.name}"></span></label> 
+		   </div><br>
+		   <div class="form-group">
+		    <label>Employee Rank : <span th:text="${employeeDto.grade_rank}"></span></label> 
+		   </div><br>
+		   <div class="form-group">
+		    <label>Employee Salary : <span th:text="${employeeDto.empSalary}"></span></label> 
+		   </div>
+		   </fieldset>
+	    </form>
+	    </div>
+	    
+	    
+	    
+ </div>   
+    
+  
+
+     
+     
+      
+      
+     
+      
+      
+      
+      
+      
+
+	<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+	<script src="/webjars/popper.js/1.14.3/popper.min.js"></script>
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+			  /* $("#employeeDiv").hide();
+			 $("#companyDiv").hide();
+			 $("#salaryTransactionDiv").hide(); 
+			 $("#employeeSalaryReportDiv").show();
+			 $("#companySalaryReportDiv").hide();
+			 $("#increaseCompanyAccountDiv").hide(); */
+			 
+			/*  $("#empReportResultDiv").hide();
+			 
+			  $("#empReportBtn").click(function(){
+				  $("#empReportResultDiv").show(); 
+			  }); */
+			  
+			  
+			});
+	</script>
+</body>
+</html>

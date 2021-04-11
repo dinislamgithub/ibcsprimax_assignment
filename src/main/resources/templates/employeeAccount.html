@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>     
+     <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+     <link th:rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>  
+     
+</head>
+<body>
+      <div class="container"> 
+		      <h1>IBCS-PRIMAX EMPLOYEE SALARY PAYMENT SYSTEM</h1> 
+		    <hr>
+      		<div class="clearfix text-center">			     
+			    <a href="/registerEmpoyeeAccount" type="button" class="btn btn-primary" id="employeeBtn">Employee Account</a>
+			    <a href="/createCompanyAccount" type="button" class="btn btn-primary" id="companyBtn">Company Account</a>
+			    <a href="/empSalaryTransaction" type="button" class="btn btn-primary" id="salaryTransactionBtn">Salary Transaction</a>
+			    <a href="/employeeReport" type="button" class="btn btn-primary" id="employeeSalaryReportBtn">Employee Salary Report</a>
+			    <a href="/companyReport" type="button" class="btn btn-primary" id="companySalaryReportBtn">Company Salary Report</a> 
+	   		</div>
+      </div>
+      
+      
+
+ <!-- employee account -->
+   <div id="empAcMsgId" class="container alert alert-success" th:if ="${msg}" style="width :fit-content; margin-top:10px">  
+     	<h5 th:text="${msg}" class="text-center"></h5>  
+   </div>
+       	
+     <div class="container" id="employeeDiv"  th:unless ="${msg}"> 
+ <form th:action="@{/registerEmpoyeeAccount}" th:object="${employeeDto}" method="post">
+
+    <h1>Register Employee Account</h1>
+    <p>Please fill in this form to create Register Employee Account.</p>
+    <hr>
+ 
+ 	<div class="form-group">
+	    <label for="name">Employee Name</label>
+	    <input type="text" th:field="*{name}" id="name" placeholder="Employee Name" class="form-control" required="required">
+	    <!-- <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span> -->
+    </div>
+
+<div class="form-group">
+    <label for="grade_rank">Grade/Rank</label>
+  <!--   <input type="text" th:field="*{grade_rank}" id="grade_rank" placeholder="Employee Grade/Rank">  -->
+ 	 <select th:field="*{grade_rank}" id="grade_rank" class="form-control" required="required">
+     	 <option value=""> Select Grade or Rank </option>
+         <option th:each="gradeOrRank : ${gradeOrRanks}" th:value="${gradeOrRank}" th:utext="${gradeOrRank}"/>
+	</select>
+	</div>
+	    
+	    <div class="form-group">
+    <label for="address">Address</label>
+    <input type="text" th:field="*{address}" id="address" placeholder="Employee Address" class="form-control" required="required"> 
+    </div>
+    <div class="form-group">
+    <label for="mobile">Mobile</label>
+    <input type="text" th:field="*{mobile}" id="mobile" placeholder="Employee Mobile" class="form-control" required="required"> 
+    </div>
+    
+    
+    <div class="form-group">
+    <label for="accountTypes">Account Type</label>
+    <select th:field="*{bankAccount.accountType}" id="accountTypes" class="form-control" required="required">
+     	 <option value="">Select Account Type</option>
+         <option th:each="accountTypes : ${accountTypesList}" th:value="${accountTypes}" th:utext="${accountTypes}"/>
+                            
+	     <!-- <option th:value="'Savings'" th:text="Savings"></option>
+	    <option th:value="'Current'" th:text="Current"></option>  -->
+	</select>
+	</div>
+    
+    <div class="form-group">
+     <label for="accountName">Account Name</label>
+    <input type="text" th:field="*{bankAccount.accountName}" id="accountName" placeholder="Employee Account Name" class="form-control" required="required"> 
+    </div>
+    
+    <!--  <label for="accountNumber">Account Number</label>
+    <input type="text" th:field="*{bankAccount.accountNumber}" id="accountNumber" placeholder="Employee Account Number"> 
+    
+     <label for="currentBalance">Current Balance</label>
+    <input type="text" th:field="*{bankAccount.currentBalance}" id="currentBalance" placeholder="Employee Current Balance">  -->
+    <div th:unless ="${basicSalaryFieldVisible}" class="form-group"> <!-- ${#lists.size(myList)} isEmpty     !#lists.isEmpty(gradOrRankList)  ${#lists.size(${gradOrRankList}==0)}-->
+   		 <label for="currentBalance">Grade Six Basic Salary</label>
+   		 <input type="text" th:field="*{bankAccount.currentBalance}" id="currentBalance" placeholder="Basic Salary for Grade Six" class="form-control">
+	</div> 
+	<div th:unless ="${basicSalaryFieldVisible}" class="form-group">
+		<div> </div>
+	</div>
+    
+    <div class="form-group">
+     <label for="bank">Bank</label>
+    <input type="text" th:field="*{bankAccount.bank}" id="bank" placeholder="Employee bank" class="form-control" required="required"> 
+    </div>
+    
+    <div class="form-group">
+     <label for="branchName">Branch Name</label>
+    <input type="text" th:field="*{bankAccount.branchName}" id="branchName" placeholder="Employee Branch Name" class="form-control" required="required"> 
+    </div>
+    
+	    <div class="clearfix">
+	    <button  class="btn btn-primary" value="Submit">Submit</button> 
+	    <a href="/" type="button" class="btn btn-primary">Home</a> 
+	   </div>
+   
+</form> 
+   </div> 
+   
+    
+  
+
+      
+     
+      
+     
+      
+      
+      
+      
+      
+
+	<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+	<script src="/webjars/popper.js/1.14.3/popper.min.js"></script>
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+			  $("#employeeDiv").show();
+			 $("#companyDiv").hide();
+			 $("#salaryTransactionDiv").hide(); 
+			 $("#employeeSalaryReportDiv").hide();
+			 $("#companySalaryReportDiv").hide();
+			 $("#increaseCompanyAccountDiv").hide(); //test  
+			  
+			});
+	</script>
+</body>
+</html>

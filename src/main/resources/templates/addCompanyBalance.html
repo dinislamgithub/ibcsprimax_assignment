@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>     
+     <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+     <link th:rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>  
+     
+</head>
+<body>
+      <div class="container"> 
+		      <h1>IBCS-PRIMAX EMPLOYEE SALARY PAYMENT SYSTEM</h1> 
+		    <hr>
+      		<div class="clearfix text-center">			     
+			    <a href="/registerEmpoyeeAccount" type="button" class="btn btn-primary" id="employeeBtn">Employee Account</a>
+			    <a href="/createCompanyAccount" type="button" class="btn btn-primary" id="companyBtn">Company Account</a>
+			    <a href="/empSalaryTransaction" type="button" class="btn btn-primary" id="salaryTransactionBtn">Salary Transaction</a>
+			    <a href="/employeeReport" type="button" class="btn btn-primary" id="employeeSalaryReportBtn">Employee Salary Report</a>
+			    <a href="/companyReport" type="button" class="btn btn-primary" id="companySalaryReportBtn">Company Salary Report</a> 
+	   		</div>
+      </div>
+      
+      
+
+
+<!-- increase Company Account -->
+<div id="addCompBalanceMsgId" class="container alert alert-success" th:if ="${msg}" style="width :fit-content; margin-top:10px">  
+     	<h5 th:text="${msg}" class="text-center"></h5>  
+   </div>
+   
+<div class="container" id="increaseCompanyAccountDiv" th:unless ="${msg}">  
+		        	 <form th:action="@{/addCompanyAccountBalance}" th:object="${bankAccountDto}" method="post"> 
+		        	 	 <h5>Account Number : <span th:text="${companyBankDetail.accountNumber}"></span></h5>
+		        	 	 <h5>Available Balance : <span th:text="${companyBankDetail.currentBalance}"></span></h5>
+		        	 	 <input type="hidden" th:field="*{accountNumber}" th:value="${companyBankDetail.currentBalance}" id="accountNumber" class="form-control">		        	 	
+		        		 <div class="form-group">
+							     <label for="currentBalance">Choose Balance</label>
+							    <input type="text" th:field="*{currentBalance}" id="currentBalance" placeholder="Choose Balance" class="form-control" required="required"> 
+	    				</div>
+	    				
+	    				<div class="clearfix">
+	    				<button  class="btn btn-primary" value="Submit">Add Money</button>
+	    				 
+	    				</div>
+		        	</form>
+    </div>
+    
+  
+
+     
+     
+      
+      
+     
+      
+      
+      
+      
+      
+
+	<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+	<script src="/webjars/popper.js/1.14.3/popper.min.js"></script>
+	<script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+			  $("#employeeDiv").hide();
+			 $("#companyDiv").hide();
+			 $("#salaryTransactionDiv").hide(); 
+			 $("#employeeSalaryReportDiv").hide();
+			 $("#companySalaryReportDiv").hide();
+			 $("#increaseCompanyAccountDiv").show(); //test  
+			 
+			 
+			 
+			  
+			});
+	</script>
+</body>
+</html>
